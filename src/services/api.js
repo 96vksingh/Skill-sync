@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'https://abbebe0fec3b.ngrok-free.app/api';
+const API_URL = process.env.REACT_APP_API_URL || 'https://skill-sync-backend-d6v3.onrender.com/api';
 
 
 async function preparednessScore(level, years) {
