@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+const API_URL = process.env.REACT_APP_API_URL || 'https://skill-sync-backend-hggm.onrender.com/api';
 
 const AuthContext = createContext();
 
@@ -24,7 +25,7 @@ export function AuthProvider({ children }) {
   const fetchUser = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5001/api/auth/profile', {
+      const res = await axios.get(`${API_URL}/auth/profile`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUser(res.data.user);
@@ -36,14 +37,14 @@ export function AuthProvider({ children }) {
   };
 
   const login = async (email, password) => {
-    const res = await axios.post('http://localhost:5001/api/auth/login', { email, password });
+    const res = await axios.post(`${API_URL}/auth/login`, { email, password });
     localStorage.setItem('token', res.data.token);
     setUser(res.data.user);
     return res.data;
   };
 
   const register = async (userData) => {
-    const res = await axios.post('http://localhost:5001/api/auth/register', userData);
+    const res = await axios.post(`${API_URL}/auth/register`, userData);
     localStorage.setItem('token', res.data.token);
     setUser(res.data.user);
     return res.data;
